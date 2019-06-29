@@ -1,0 +1,7 @@
+
+spring:
+  datasource:
+    url: jdbc:sqlserver://bibliopoli.database.windows.net:1433;database=User;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
+    username: userBiblio
+    password: Levitico2019
+
