@@ -1,25 +1,29 @@
-package co.edu.poligran.bibliopoli.adapter;
+package co.edu.poligran.bibliopoli.repository;
 
 import co.edu.poligran.bibliopoli.common.ReactiveCrud;
 import co.edu.poligran.bibliopoli.persistent.model.Usuario;
-import co.edu.poligran.bibliopoli.repository.LoginRepository;
+import co.edu.poligran.bibliopoli.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Repository
-public class LoginAdapterRepository implements ReactiveCrud<Usuario> {
+public class UserAdapterRepository implements ReactiveCrud<Usuario> {
 
     @Autowired
-    private LoginRepository repository;
+    private UserRepository repository;
 
-    public LoginAdapterRepository(LoginRepository repository) {
+    public UserAdapterRepository(UserRepository repository) {
         this.repository = repository;
     }
 
     public Mono<Usuario> findById(String cedula) {
-        return Mono.just(repository.getUsuarioByCedula(cedula));
+        try {
+            return Mono.just(repository.getUsuarioByCedula(cedula));
+        } catch (Exception e) {
+            return Mono.error(new Exception("No se encontro Usuario"));
+        }
     }
 
     @Override
@@ -33,8 +37,9 @@ public class LoginAdapterRepository implements ReactiveCrud<Usuario> {
     }
 
     @Override
-    public Mono<Usuario> save(Usuario var1) {
-        return null;
+    public Mono<Usuario> save(Usuario u) {
+        repository.save(u);
+        return Mono.empty();
     }
 
     @Override

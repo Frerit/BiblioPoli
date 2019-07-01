@@ -9,20 +9,14 @@ import java.util.Date;
 
 @Getter
 @Setter
-public class LoginDto {
+public class UserLoginDto {
 
     private String cedula;
     private Date timestamp;
     private Estados estado;
     private Usuario usuario;
 
-    public LoginDto() {
+    public UserLoginDto() {
     }
 
-    public LoginDto(String cedula, Date timestamp, Estados estado, Usuario usuario) {
-        this.cedula = cedula;
-        this.timestamp = timestamp;
-        this.estado = estado;
-        this.usuario = usuario;
-    }
 }
